@@ -1,41 +1,47 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'session_model.dart';
+part of 'product_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SessionAdapter extends TypeAdapter<Session> {
+class ProductAdapter extends TypeAdapter<Product> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
-  Session read(BinaryReader reader) {
+  Product read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Session(
-      id: fields[0] as String,
-      startDate: fields[1] as DateTime,
-      endDate: fields[2] as DateTime?,
-      author: fields[3] as String?,
+    return Product(
+      id: fields[0] as int,
+      name: fields[1] as String,
+      code: fields[2] as String,
+      actualStock: fields[3] as int,
+      previousStock: fields[4] as int,
+      isPinned: fields[5] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Session obj) {
+  void write(BinaryWriter writer, Product obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.startDate)
+      ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.endDate)
+      ..write(obj.code)
       ..writeByte(3)
-      ..write(obj.author);
+      ..write(obj.actualStock)
+      ..writeByte(4)
+      ..write(obj.previousStock)
+      ..writeByte(5)
+      ..write(obj.isPinned);
   }
 
   @override
@@ -44,7 +50,7 @@ class SessionAdapter extends TypeAdapter<Session> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SessionAdapter &&
+      other is ProductAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

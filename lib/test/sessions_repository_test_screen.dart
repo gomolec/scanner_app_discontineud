@@ -1,52 +1,77 @@
 import 'package:flutter/material.dart';
 
+import 'package:scanner_app/test/products_repository_test_screen.dart';
+
 import '../models/models.dart';
+import '../repositories/products_repository.dart';
 import '../repositories/sessions_repository.dart';
 
 class SessionsRepositoryTestScreen extends StatelessWidget {
-  final SessionRepository sessionRepository;
+  final SessionsRepository sessionsRepository;
+  final ProductsRepository productsRepository;
+
   const SessionsRepositoryTestScreen({
     Key? key,
-    required this.sessionRepository,
+    required this.sessionsRepository,
+    required this.productsRepository,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Sessions Repository Test")),
-      body: Column(
-        children: [
-          StreamBuilder(
-            stream: sessionRepository.sessions,
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Session>> snapshot) {
-              sessionRepository.getSavedSessions();
-              if (snapshot.hasData) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(snapshot.data![index].id),
-                      subtitle: Text((() {
-                        String subtitle =
-                            snapshot.data![index].startDate.toString();
-                        if (snapshot.data![index].endDate != null) {
-                          subtitle += "\n${snapshot.data![index].endDate}";
-                        }
-                        return subtitle;
-                      }())),
-                      onLongPress: () {
-                        sessionRepository.endSession(snapshot.data![index].id);
-                      },
-                    );
-                  },
-                );
-              }
-              return const Center(child: CircularProgressIndicator());
-            },
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            StreamBuilder(
+              stream: sessionsRepository.sessions,
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Session>> snapshot) {
+                sessionsRepository.getSavedSessions();
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    reverse: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Text("${index + 1}."),
+                        title: Text(snapshot.data![index].id),
+                        subtitle: Text((() {
+                          String subtitle =
+                              snapshot.data![index].startDate.toString();
+                          if (snapshot.data![index].endDate != null) {
+                            subtitle += "\n${snapshot.data![index].endDate}";
+                          }
+                          return subtitle;
+                        }())),
+                        onTap: () async {
+                          productsRepository
+                              .openProductsSession(snapshot.data![index].id);
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  ProductsRepositoryTestScreen(
+                                productsRepository: productsRepository,
+                              ),
+                            ),
+                          );
+                        },
+                        onLongPress: () {
+                          sessionsRepository
+                              .deleteSession(snapshot.data![index].id);
+                        },
+                      );
+                    },
+                  );
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -54,7 +79,7 @@ class SessionsRepositoryTestScreen extends StatelessWidget {
           FloatingActionButton(
             child: const Icon(Icons.add),
             onPressed: () {
-              sessionRepository.createNewSession(author: 'TEST');
+              sessionsRepository.createNewSession(author: 'TEST');
             },
           )
         ],

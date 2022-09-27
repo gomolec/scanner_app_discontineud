@@ -3,16 +3,20 @@ import 'dart:async';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
+import 'package:scanner_app/repositories/products_repository.dart';
+
 import '../models/models.dart';
 
-class SessionRepository {
+class SessionsRepository {
   final HiveInterface hiveInterface;
-  final _controller = StreamController<List<Session>>();
+  final _controller = StreamController<List<Session>>.broadcast();
   final int maxStoredSessions;
+  final ProductsRepository productsRepository;
 
-  SessionRepository({
+  SessionsRepository({
     required this.hiveInterface,
-    this.maxStoredSessions = 10,
+    this.maxStoredSessions = 5,
+    required this.productsRepository,
   });
 
   Box<Session>? _sessionsBox;
@@ -32,11 +36,11 @@ class SessionRepository {
       author: author,
     );
     if (_sessions.isNotEmpty && _sessions.length >= maxStoredSessions) {
-      _sessionsBox!.deleteAt(0);
-      _sessions.removeAt(0);
+      deleteSession(_sessionsBox!.getAt(0)!.id);
     }
     _sessions.add(newSession);
     await _sessionsBox!.put(newSession.id, newSession);
+    await productsRepository.openProductsSession(newSession.id);
     addToStream(_sessions);
     return Session(id: '', startDate: DateTime.now());
   }
@@ -59,6 +63,7 @@ class SessionRepository {
       _sessions.removeAt(index);
       addToStream(_sessions);
       _sessionsBox!.delete(id);
+      productsRepository.deleteProductsSession(id);
     }
   }
 
@@ -71,19 +76,21 @@ class SessionRepository {
     }
   }
 
-  void endSession(String id) {
+  Future<void> endSession(String id) async {
     Session? session = findById(id);
     if (session != null) {
       session = session.copyWith(endDate: DateTime.now());
       updateSession(session);
+      await productsRepository.closeProductsSession();
     }
   }
 
-  Session? restoreSession(String id) {
+  Future<Session?> restoreSession(String id) async {
     Session? session = findById(id);
     if (session != null) {
       session = session.copyWith(endDate: null);
       updateSession(session);
+      await productsRepository.openProductsSession(id);
     }
     return session;
   }
