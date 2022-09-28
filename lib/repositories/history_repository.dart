@@ -47,7 +47,7 @@ class HistoryRepository {
     addToStream(_history);
   }
 
-  void deleteHistorySession(String id) async {
+  Future<void> deleteHistorySession(String id) async {
     if (_historyBox != null && _historyBox!.name == "history-$id") {
       await closeHistorySession();
     }
@@ -67,7 +67,7 @@ class HistoryRepository {
           _historyBox!.deleteAt(i);
         }
       }
-      if (_history.length >= maxStoredHistoryActions) {
+      if (currentActivityIndex >= maxStoredHistoryActions) {
         _history.removeAt(0);
         _historyBox!.deleteAt(0);
         currentActivityIndex--;

@@ -38,7 +38,7 @@ class ProductsRepository {
     addToStream(_products);
   }
 
-  void deleteProductsSession(String id) async {
+  Future<void> deleteProductsSession(String id) async {
     if (_productsBox != null && _productsBox!.name == "products-$id") {
       await closeProductsSession();
     }

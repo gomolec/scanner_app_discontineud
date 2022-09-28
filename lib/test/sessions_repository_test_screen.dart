@@ -65,8 +65,8 @@ class SessionsRepositoryTestScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        onLongPress: () {
-                          sessionsRepository
+                        onLongPress: () async {
+                          await sessionsRepository
                               .deleteSession(snapshot.data![index].id);
                         },
                       );
@@ -84,8 +84,8 @@ class SessionsRepositoryTestScreen extends StatelessWidget {
         children: [
           FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: () {
-              sessionsRepository.createNewSession(author: 'TEST');
+            onPressed: () async {
+              await sessionsRepository.createNewSession(author: 'TEST');
             },
           )
         ],

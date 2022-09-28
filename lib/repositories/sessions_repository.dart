@@ -23,7 +23,6 @@ class SessionsRepository {
   });
 
   Box<Session>? _sessionsBox;
-  List<Session> _sessions = [];
 
   Stream<List<Session>> get sessions => _controller.stream;
 
@@ -38,46 +37,45 @@ class SessionsRepository {
       startDate: DateTime.now(),
       author: author,
     );
-    if (_sessions.length >= maxStoredSessions) {
-      _sessionsBox!.delete(_sessions.removeAt(0).id);
+    if (_sessionsBox!.length >= maxStoredSessions) {
+      await deleteSession(_sessionsBox!.values.toList().first.id);
     }
-    _sessions.add(newSession);
-    await _sessionsBox!.put(newSession.id, newSession);
+    await _sessionsBox!.add(newSession);
     await productsRepository.openProductsSession(newSession.id);
     await historyRepository.openHistorySession(newSession.id);
-    addToStream(_sessions);
+    addToStream(_sessionsBox!.values.toList());
     return newSession;
   }
 
   Future<void> getSavedSessions() async {
     _sessionsBox = await hiveInterface.openBox('sessions');
-    _sessions = _sessionsBox!.values.toList();
-    addToStream(_sessions);
+    addToStream(_sessionsBox!.values.toList());
   }
 
   Session? findById(String id) {
-    return _sessions
+    if (_sessionsBox == null) return null;
+    return _sessionsBox!.values
+        .toList()
         .cast<Session?>()
         .firstWhere((session) => session!.id == id, orElse: () => null);
   }
 
-  void deleteSession(String id) {
-    final index = _sessions.indexWhere((it) => it.id == id);
+  Future<void> deleteSession(String id) async {
+    final index = _sessionsBox!.values.toList().indexWhere((it) => it.id == id);
     if (index != -1) {
-      _sessions.removeAt(index);
-      addToStream(_sessions);
-      _sessionsBox!.delete(id);
-      productsRepository.deleteProductsSession(id);
-      historyRepository.deleteHistorySession(id);
+      await _sessionsBox!.delete(_sessionsBox!.keys.toList()[index]);
+      addToStream(_sessionsBox!.values.toList());
+      await productsRepository.deleteProductsSession(id);
+      await historyRepository.deleteHistorySession(id);
     }
   }
 
-  void updateSession(Session session) {
-    final index = _sessions.indexWhere((it) => it.id == session.id);
+  Future<void> updateSession(Session session) async {
+    final index =
+        _sessionsBox!.values.toList().indexWhere((it) => it.id == session.id);
     if (index != -1) {
-      _sessions[index] = session;
-      addToStream(_sessions);
-      _sessionsBox!.put(session.id, session);
+      await _sessionsBox!.put(_sessionsBox!.keys.toList()[index], session);
+      addToStream(_sessionsBox!.values.toList());
     }
   }
 
