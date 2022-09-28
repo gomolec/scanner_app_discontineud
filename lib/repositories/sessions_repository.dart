@@ -1,22 +1,25 @@
 import 'dart:async';
 
 import 'package:hive/hive.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
-import 'package:scanner_app/repositories/products_repository.dart';
-
 import '../models/models.dart';
+import 'history_repository.dart';
+import 'products_repository.dart';
 
 class SessionsRepository {
   final HiveInterface hiveInterface;
-  final _controller = StreamController<List<Session>>.broadcast();
+  final _controller = BehaviorSubject<List<Session>>();
   final int maxStoredSessions;
   final ProductsRepository productsRepository;
+  final HistoryRepository historyRepository;
 
   SessionsRepository({
     required this.hiveInterface,
     this.maxStoredSessions = 5,
     required this.productsRepository,
+    required this.historyRepository,
   });
 
   Box<Session>? _sessionsBox;
@@ -35,14 +38,15 @@ class SessionsRepository {
       startDate: DateTime.now(),
       author: author,
     );
-    if (_sessions.isNotEmpty && _sessions.length >= maxStoredSessions) {
-      deleteSession(_sessionsBox!.getAt(0)!.id);
+    if (_sessions.length >= maxStoredSessions) {
+      _sessionsBox!.delete(_sessions.removeAt(0).id);
     }
     _sessions.add(newSession);
     await _sessionsBox!.put(newSession.id, newSession);
     await productsRepository.openProductsSession(newSession.id);
+    await historyRepository.openHistorySession(newSession.id);
     addToStream(_sessions);
-    return Session(id: '', startDate: DateTime.now());
+    return newSession;
   }
 
   Future<void> getSavedSessions() async {
@@ -64,6 +68,7 @@ class SessionsRepository {
       addToStream(_sessions);
       _sessionsBox!.delete(id);
       productsRepository.deleteProductsSession(id);
+      historyRepository.deleteHistorySession(id);
     }
   }
 
@@ -82,6 +87,7 @@ class SessionsRepository {
       session = session.copyWith(endDate: DateTime.now());
       updateSession(session);
       await productsRepository.closeProductsSession();
+      await historyRepository.closeHistorySession();
     }
   }
 
@@ -91,6 +97,7 @@ class SessionsRepository {
       session = session.copyWith(endDate: null);
       updateSession(session);
       await productsRepository.openProductsSession(id);
+      await historyRepository.openHistorySession(id);
     }
     return session;
   }

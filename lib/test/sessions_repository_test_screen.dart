@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
-import 'package:scanner_app/test/products_repository_test_screen.dart';
+import 'products_repository_test_screen.dart';
 
 import '../models/models.dart';
 import '../repositories/products_repository.dart';
 import '../repositories/sessions_repository.dart';
+import '../repositories/history_repository.dart';
 
 class SessionsRepositoryTestScreen extends StatelessWidget {
   final SessionsRepository sessionsRepository;
   final ProductsRepository productsRepository;
+  final HistoryRepository historyRepository;
 
   const SessionsRepositoryTestScreen({
     Key? key,
     required this.sessionsRepository,
     required this.productsRepository,
+    required this.historyRepository,
   }) : super(key: key);
 
   @override
@@ -30,7 +33,7 @@ class SessionsRepositoryTestScreen extends StatelessWidget {
                 sessionsRepository.getSavedSessions();
                 if (snapshot.hasData) {
                   return ListView.builder(
-                    reverse: true,
+                    //reverse: true,
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
@@ -47,14 +50,17 @@ class SessionsRepositoryTestScreen extends StatelessWidget {
                           return subtitle;
                         }())),
                         onTap: () async {
-                          productsRepository
+                          await productsRepository
                               .openProductsSession(snapshot.data![index].id);
+                          await historyRepository
+                              .openHistorySession(snapshot.data![index].id);
                           Navigator.push<void>(
                             context,
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) =>
                                   ProductsRepositoryTestScreen(
                                 productsRepository: productsRepository,
+                                historyRepository: historyRepository,
                               ),
                             ),
                           );

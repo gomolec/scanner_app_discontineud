@@ -1,12 +1,13 @@
 import 'dart:async';
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../models/models.dart';
 
 class ProductsRepository {
   final HiveInterface hiveInterface;
-  final _controller = StreamController<List<Product>>.broadcast();
+  final _controller = BehaviorSubject<List<Product>>();
 
   ProductsRepository({
     required this.hiveInterface,
@@ -30,7 +31,7 @@ class ProductsRepository {
 
   Future<void> closeProductsSession() async {
     if (_productsBox != null) {
-      _productsBox!.close();
+      await _productsBox!.close();
       _productsBox = null;
     }
     _products = [];
@@ -41,9 +42,7 @@ class ProductsRepository {
     if (_productsBox != null && _productsBox!.name == "products-$id") {
       await closeProductsSession();
     }
-    final Box<Product> boxToDelete =
-        await hiveInterface.openBox("products-$id");
-    await boxToDelete.deleteFromDisk();
+    hiveInterface.deleteBoxFromDisk("products-$id");
   }
 
   Session? findById(String id) {
@@ -61,7 +60,7 @@ class ProductsRepository {
     }
   }
 
-  void addProduct(Product product) {
+  Product addProduct(Product product) {
     int id;
     if (_products.isNotEmpty) {
       id = _products.last.id + 1;
@@ -72,6 +71,7 @@ class ProductsRepository {
     _products.add(newProduct);
     _productsBox!.put(id, newProduct);
     addToStream(_products);
+    return newProduct;
   }
 
   void deleteProduct(int id) {
