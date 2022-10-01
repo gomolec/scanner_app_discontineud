@@ -5,11 +5,11 @@ import 'package:scanner_app/repositories/products_repository.dart';
 import '../models/models.dart';
 import '../repositories/history_repository.dart';
 
-class HistoryRepositoryTestScreen extends StatelessWidget {
+class HistoryRepositoryDebugScreen extends StatelessWidget {
   final HistoryRepository historyRepository;
   final ProductsRepository productsRepository;
 
-  const HistoryRepositoryTestScreen({
+  const HistoryRepositoryDebugScreen({
     Key? key,
     required this.historyRepository,
     required this.productsRepository,

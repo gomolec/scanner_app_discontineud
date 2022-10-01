@@ -6,19 +6,35 @@ import 'repositories/sessions_repository.dart';
 import 'repositories/history_repository.dart';
 import 'repositories/products_repository.dart';
 
-import 'test/sessions_repository_test_screen.dart';
+import 'package:json_theme/json_theme.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
+
+import 'debug/sessions_repository_debug_screen.dart';
+import 'screens/screens.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final themeStr = await rootBundle.loadString('assets/theme/light_theme.json');
+  final themeJson = jsonDecode(themeStr);
+  final theme = ThemeDecoder.decodeThemeData(themeJson)!;
+
   await Hive.initFlutter();
   Hive.registerAdapter(SessionAdapter());
   Hive.registerAdapter(ProductAdapter());
   Hive.registerAdapter(HistoryActionAdapter());
 
-  runApp(const MyApp());
+  runApp(MyApp(
+    theme: theme,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final ThemeData theme;
+  const MyApp({
+    required this.theme,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +51,18 @@ class MyApp extends StatelessWidget {
       historyRepository: historyRepository,
     );
     return MaterialApp(
-      title: 'Scanner App Demo',
-      home: SessionsRepositoryTestScreen(
-        sessionsRepository: sessionsRepository,
-        productsRepository: productsRepository,
-        historyRepository: historyRepository,
-      ),
+      theme: theme,
+      title: 'Scanner App',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/product': (context) => const ProductScreen(),
+        '/debug': (context) => SessionsRepositoryDebugScreen(
+              sessionsRepository: sessionsRepository,
+              productsRepository: productsRepository,
+              historyRepository: historyRepository,
+            ),
+      },
     );
   }
 }

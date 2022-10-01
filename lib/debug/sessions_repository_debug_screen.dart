@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'products_repository_test_screen.dart';
+import 'products_repository_debug_screen.dart';
 
 import '../models/models.dart';
 import '../repositories/products_repository.dart';
 import '../repositories/sessions_repository.dart';
 import '../repositories/history_repository.dart';
 
-class SessionsRepositoryTestScreen extends StatelessWidget {
+class SessionsRepositoryDebugScreen extends StatelessWidget {
   final SessionsRepository sessionsRepository;
   final ProductsRepository productsRepository;
   final HistoryRepository historyRepository;
 
-  const SessionsRepositoryTestScreen({
+  const SessionsRepositoryDebugScreen({
     Key? key,
     required this.sessionsRepository,
     required this.productsRepository,
@@ -49,16 +49,16 @@ class SessionsRepositoryTestScreen extends StatelessWidget {
                           }
                           return subtitle;
                         }())),
-                        onTap: () async {
-                          await productsRepository
+                        onTap: () {
+                          productsRepository
                               .openProductsSession(snapshot.data![index].id);
-                          await historyRepository
+                          historyRepository
                               .openHistorySession(snapshot.data![index].id);
                           Navigator.push<void>(
                             context,
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) =>
-                                  ProductsRepositoryTestScreen(
+                                  ProductsRepositoryDebugScreen(
                                 productsRepository: productsRepository,
                                 historyRepository: historyRepository,
                               ),

@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import '../models/models.dart';
 import '../repositories/history_repository.dart';
 import '../repositories/products_repository.dart';
-import 'history_repository_test_screen.dart';
+import 'history_repository_debug_screen.dart';
 
-class ProductsRepositoryTestScreen extends StatelessWidget {
+class ProductsRepositoryDebugScreen extends StatelessWidget {
   final ProductsRepository productsRepository;
   final HistoryRepository historyRepository;
 
-  const ProductsRepositoryTestScreen({
+  const ProductsRepositoryDebugScreen({
     Key? key,
     required this.productsRepository,
     required this.historyRepository,
@@ -29,7 +29,7 @@ class ProductsRepositoryTestScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute<void>(
                   builder: (BuildContext context) =>
-                      HistoryRepositoryTestScreen(
+                      HistoryRepositoryDebugScreen(
                     historyRepository: historyRepository,
                     productsRepository: productsRepository,
                   ),
