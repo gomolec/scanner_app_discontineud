@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:scanner_app/models/models.dart';
+import 'cubits/products_cubit/products_cubit.dart';
+import 'cubits/sessions_cubit/sessions_cubit.dart';
 import 'repositories/sessions_repository.dart';
 import 'repositories/history_repository.dart';
 import 'repositories/products_repository.dart';
@@ -12,6 +15,7 @@ import 'dart:convert';
 
 import 'debug/sessions_repository_debug_screen.dart';
 import 'screens/screens.dart';
+import 'screens/sessions_history_screen/sessions_history_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,19 +54,31 @@ class MyApp extends StatelessWidget {
       productsRepository: productsRepository,
       historyRepository: historyRepository,
     );
-    return MaterialApp(
-      theme: theme,
-      title: 'Scanner App',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomeScreen(),
-        '/product': (context) => const ProductScreen(),
-        '/debug': (context) => SessionsRepositoryDebugScreen(
-              sessionsRepository: sessionsRepository,
-              productsRepository: productsRepository,
-              historyRepository: historyRepository,
-            ),
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SessionsCubit(
+            sessionsRepository: sessionsRepository,
+          ),
+        ),
+        BlocProvider(
+          create: (context) => ProductsCubit(
+            productsRepository: productsRepository,
+            historyRepository: historyRepository,
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        theme: theme,
+        title: 'Scanner App',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const HomeScreen(),
+          '/product': (context) => const ProductScreen(),
+          '/sessions_history': (context) => const SessionsHistoryScreen(),
+          '/debug': (context) => const SessionsRepositoryDebugScreen(),
+        },
+      ),
     );
   }
 }

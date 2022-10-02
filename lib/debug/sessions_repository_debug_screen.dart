@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'products_repository_debug_screen.dart';
 
@@ -8,21 +9,28 @@ import '../repositories/sessions_repository.dart';
 import '../repositories/history_repository.dart';
 
 class SessionsRepositoryDebugScreen extends StatelessWidget {
-  final SessionsRepository sessionsRepository;
-  final ProductsRepository productsRepository;
-  final HistoryRepository historyRepository;
-
   const SessionsRepositoryDebugScreen({
     Key? key,
-    required this.sessionsRepository,
-    required this.productsRepository,
-    required this.historyRepository,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final HiveInterface hiveInterface = Hive;
+    final ProductsRepository productsRepository = ProductsRepository(
+      hiveInterface: hiveInterface,
+    );
+    final HistoryRepository historyRepository = HistoryRepository(
+      hiveInterface: hiveInterface,
+    );
+    final SessionsRepository sessionsRepository = SessionsRepository(
+      hiveInterface: hiveInterface,
+      productsRepository: productsRepository,
+      historyRepository: historyRepository,
+    );
     return Scaffold(
-      appBar: AppBar(title: const Text("Sessions Repository Test")),
+      appBar: AppBar(
+        title: const Text("Sessions Repository Test"),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

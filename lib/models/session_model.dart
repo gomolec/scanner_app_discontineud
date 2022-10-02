@@ -25,14 +25,14 @@ class Session extends Equatable {
   Session copyWith({
     String? id,
     DateTime? startDate,
-    DateTime? endDate,
-    String? author,
+    DateTime? Function()? endDate,
+    String? Function()? author,
   }) {
     return Session(
       id: id ?? this.id,
       startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
-      author: author ?? this.author,
+      endDate: endDate != null ? endDate() : this.endDate,
+      author: author != null ? author() : this.author,
     );
   }
 

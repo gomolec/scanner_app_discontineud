@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:scanner_app/constants.dart';
-import 'package:scanner_app/screens/provider/quantity_provider.dart';
+
+import '../../../provider/quantity_provider.dart';
 
 class QuantityButtons extends StatelessWidget {
   final double width;

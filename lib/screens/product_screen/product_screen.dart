@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scanner_app/cubits/products_cubit/products_cubit.dart';
 import 'package:scanner_app/screens/product_screen/widgets/pin_button.dart';
 import 'package:scanner_app/screens/product_screen/widgets/quantity_buttons.dart';
-import 'package:scanner_app/screens/provider/quantity_provider.dart';
 
 import '../../models/models.dart';
+import '../../provider/quantity_provider.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -13,16 +14,19 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = ModalRoute.of(context)!.settings.arguments as Product;
 
+    //TODO Provider nie działa prawidłowo - odświerza całą stronę i nie można pobierac danych z widgetu pod ChangeNotifierProvider poprzez context.read
+    QuantityProvider quantityProvider = QuantityProvider(
+      actualValue: product.actualStock,
+      previousValue: product.previousStock,
+    );
+
     bool isPinned = product.isPinned;
     void setPin(bool value) {
       isPinned = value;
     }
 
     return ChangeNotifierProvider(
-      create: (context) => QuantityProvider(
-        actualValue: product.actualStock,
-        previousValue: product.previousStock,
-      ),
+      create: (context) => quantityProvider,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Szczegóły produktu"),
@@ -34,7 +38,13 @@ class ProductScreen extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            context.read<ProductsCubit>().updateProduct(product.copyWith(
+                  actualStock: quantityProvider.actualValue,
+                  isPinned: isPinned,
+                ));
+            Navigator.pop(context);
+          },
           tooltip: 'Save',
           child: const Icon(Icons.save_rounded),
         ),

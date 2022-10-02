@@ -10,6 +10,13 @@ class MenuDrawer extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
+              leading: const Icon(Icons.history_rounded),
+              title: const Text("Historia sesji"),
+              onTap: () {
+                Navigator.popAndPushNamed(context, "/sessions_history");
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.home_repair_service_rounded),
               title: const Text("DEBUG"),
               onTap: () {

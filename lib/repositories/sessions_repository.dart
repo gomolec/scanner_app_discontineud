@@ -82,7 +82,7 @@ class SessionsRepository {
   Future<void> endSession(String id) async {
     Session? session = findById(id);
     if (session != null) {
-      session = session.copyWith(endDate: DateTime.now());
+      session = session.copyWith(endDate: () => DateTime.now());
       updateSession(session);
       await productsRepository.closeProductsSession();
       await historyRepository.closeHistorySession();
@@ -92,7 +92,7 @@ class SessionsRepository {
   Future<Session?> restoreSession(String id) async {
     Session? session = findById(id);
     if (session != null) {
-      session = session.copyWith(endDate: null);
+      session = session.copyWith(endDate: () => null);
       updateSession(session);
       await productsRepository.openProductsSession(id);
       await historyRepository.openHistorySession(id);
