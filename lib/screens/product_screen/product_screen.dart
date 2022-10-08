@@ -5,7 +5,7 @@ import 'package:scanner_app/screens/product_screen/widgets/pin_button.dart';
 import 'package:scanner_app/screens/product_screen/widgets/quantity_buttons.dart';
 
 import '../../models/models.dart';
-import '../../provider/quantity_provider.dart';
+import '../../providers/quantity_provider.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);

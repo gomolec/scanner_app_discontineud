@@ -31,8 +31,12 @@ class ProductsCubit extends Cubit<ProductsState> {
   void _subscribe() {
     _subscription = productsRepository.products.listen(
       (items) {
-        products = items.toList();
-        emitProducts();
+        if (productsRepository.isSessionOpened) {
+          products = items.toList();
+          emitProducts();
+        } else {
+          emit(ProductsInitial());
+        }
       },
       //TODO onError: (error) => emit(ListError('$error')),
     );
@@ -46,8 +50,8 @@ class ProductsCubit extends Cubit<ProductsState> {
   }
 
   void updateProduct(Product updatedProduct) {
-    // historyRepository.addActivity(
-    //     productsRepository.findById(updatedProduct.id), updatedProduct);
+    historyRepository.addActivity(
+        productsRepository.findById(updatedProduct.id), updatedProduct);
     productsRepository.updateProduct(updatedProduct);
   }
 

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:scanner_app/screens/home_screen/pages/scanned_page.dart';
 import 'package:scanner_app/screens/home_screen/pages/unscanned_page.dart';
+import 'package:scanner_app/screens/home_screen/widgets/history_drawer.dart';
 
+import 'widgets/history_button.dart';
 import 'widgets/menu_drawer.dart';
+import 'widgets/search_bar.dart';
+import 'widgets/search_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,17 +19,9 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text("Scanner App"),
           centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search_rounded),
-              tooltip: 'Search',
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.history_rounded),
-              tooltip: 'History',
-            )
+          actions: const [
+            SearchButton(),
+            HistoryButton(),
           ],
           bottom: const TabBar(
             tabs: [
@@ -34,6 +30,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
+        endDrawer: const HistoryDrawer(),
         drawer: const MenuDrawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
@@ -41,8 +38,8 @@ class HomeScreen extends StatelessWidget {
           child: const Icon(Icons.document_scanner_rounded),
         ),
         body: Column(
-          children: const [
-            Expanded(
+          children: [
+            const Expanded(
               child: TabBarView(
                 children: [
                   UnscannedPage(),
@@ -50,6 +47,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SearchBar(),
           ],
         ),
       ),

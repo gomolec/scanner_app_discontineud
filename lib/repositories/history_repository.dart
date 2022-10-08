@@ -20,6 +20,7 @@ class HistoryRepository {
   int currentActivityIndex = -1;
 
   Stream<List<HistoryAction>> get history => _controller.stream;
+  bool get isSessionOpened => _historyBox != null;
 
   void addToStream(List<HistoryAction> history) =>
       _controller.sink.add(history);
@@ -107,5 +108,19 @@ class HistoryRepository {
       return action;
     }
     return null;
+  }
+
+  bool canUndo() {
+    if (_history.isNotEmpty) {
+      if (_history.first.isRedo == false) return true;
+    }
+    return false;
+  }
+
+  bool canRedo() {
+    if (_history.isNotEmpty) {
+      if (_history.last.isRedo == true) return true;
+    }
+    return false;
   }
 }

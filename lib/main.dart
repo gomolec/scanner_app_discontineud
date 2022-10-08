@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:scanner_app/models/models.dart';
-import 'package:scanner_app/provider/quantity_provider.dart';
+import '/models/models.dart';
+import '/providers/quantity_provider.dart';
+import 'cubits/history_cubit/history_cubit.dart';
 import 'cubits/products_cubit/products_cubit.dart';
 import 'cubits/sessions_cubit/sessions_cubit.dart';
 import 'repositories/sessions_repository.dart';
@@ -37,25 +38,27 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final ThemeData theme;
-  const MyApp({
+
+  MyApp({
     required this.theme,
     Key? key,
   }) : super(key: key);
 
+  final HiveInterface hiveInterface = Hive;
+  late final ProductsRepository productsRepository = ProductsRepository(
+    hiveInterface: hiveInterface,
+  );
+  late final HistoryRepository historyRepository = HistoryRepository(
+    hiveInterface: hiveInterface,
+  );
+  late final SessionsRepository sessionsRepository = SessionsRepository(
+    hiveInterface: hiveInterface,
+    productsRepository: productsRepository,
+    historyRepository: historyRepository,
+  );
+
   @override
   Widget build(BuildContext context) {
-    final HiveInterface hiveInterface = Hive;
-    final ProductsRepository productsRepository = ProductsRepository(
-      hiveInterface: hiveInterface,
-    );
-    final HistoryRepository historyRepository = HistoryRepository(
-      hiveInterface: hiveInterface,
-    );
-    final SessionsRepository sessionsRepository = SessionsRepository(
-      hiveInterface: hiveInterface,
-      productsRepository: productsRepository,
-      historyRepository: historyRepository,
-    );
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -67,6 +70,12 @@ class MyApp extends StatelessWidget {
           create: (context) => ProductsCubit(
             productsRepository: productsRepository,
             historyRepository: historyRepository,
+          ),
+        ),
+        BlocProvider(
+          create: (context) => HistoryCubit(
+            historyRepository: historyRepository,
+            productsRepository: productsRepository,
           ),
         ),
       ],

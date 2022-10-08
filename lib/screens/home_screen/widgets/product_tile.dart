@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:scanner_app/constants.dart';
 
 import '../../../models/models.dart';
-import '../../../provider/quantity_provider.dart';
+import '../../../providers/quantity_provider.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;

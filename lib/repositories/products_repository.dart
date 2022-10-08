@@ -17,6 +17,7 @@ class ProductsRepository {
   List<Product> _products = [];
 
   Stream<List<Product>> get products => _controller.stream;
+  bool get isSessionOpened => _productsBox != null;
 
   void addToStream(List<Product> products) => _controller.sink.add(products);
 
@@ -45,10 +46,10 @@ class ProductsRepository {
     hiveInterface.deleteBoxFromDisk("products-$id");
   }
 
-  Session? findById(String id) {
+  Product? findById(int id) {
     return _products
-        .cast<Session?>()
-        .firstWhere((session) => session!.id == id, orElse: () => null);
+        .cast<Product?>()
+        .firstWhere((product) => product!.id == id, orElse: () => null);
   }
 
   void updateProduct(Product product) {

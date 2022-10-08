@@ -12,6 +12,14 @@ class SessionsHistoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Historia sesji"),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.read<SessionsCubit>().createNewSession();
+          Navigator.pop(context);
+        },
+        tooltip: 'Create session',
+        child: const Icon(Icons.add_box_outlined),
+      ),
       body: BlocBuilder<SessionsCubit, SessionsState>(
         builder: (context, state) {
           if (state is SessionsLoaded && state.sessions.isNotEmpty) {
