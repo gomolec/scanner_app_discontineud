@@ -8,6 +8,7 @@ import '/providers/quantity_provider.dart';
 import 'cubits/history_cubit/history_cubit.dart';
 import 'cubits/products_cubit/products_cubit.dart';
 import 'cubits/sessions_cubit/sessions_cubit.dart';
+import 'providers/search_bar_provider.dart';
 import 'repositories/sessions_repository.dart';
 import 'repositories/history_repository.dart';
 import 'repositories/products_repository.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => QuantityProvider()),
+          ChangeNotifierProvider(create: (context) => SearchBarProvider()),
         ],
         child: MaterialApp(
           theme: theme,

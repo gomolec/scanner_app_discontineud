@@ -9,16 +9,16 @@ class QuantityButtons extends StatelessWidget {
   final double width;
   final double height;
 
-  const QuantityButtons({
+  QuantityButtons({
     Key? key,
     required this.width,
     required this.height,
   }) : super(key: key);
 
+  final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController();
-
     return Container(
       width: width,
       height: height,
