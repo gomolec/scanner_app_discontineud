@@ -68,6 +68,7 @@ class SessionsHistoryScreen extends StatelessWidget {
                     ElevatedButton.icon(
                       onPressed: () {
                         context.read<SessionsCubit>().createNewSession();
+                        Navigator.pop(context);
                       },
                       icon: const Icon(Icons.create_new_folder_rounded),
                       label: const Text("Utwórz nową sesję"),

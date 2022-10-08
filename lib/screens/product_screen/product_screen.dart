@@ -14,80 +14,71 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = ModalRoute.of(context)!.settings.arguments as Product;
 
-    //TODO Provider nie działa prawidłowo - odświerza całą stronę i nie można pobierac danych z widgetu pod ChangeNotifierProvider poprzez context.read
-    QuantityProvider quantityProvider = QuantityProvider(
-      actualValue: product.actualStock,
-      previousValue: product.previousStock,
-    );
-
     bool isPinned = product.isPinned;
     void setPin(bool value) {
       isPinned = value;
     }
 
-    return ChangeNotifierProvider(
-      create: (context) => quantityProvider,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Szczegóły produktu"),
-          actions: [
-            PinButton(
-              initialValue: isPinned,
-              setPin: setPin,
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.read<ProductsCubit>().updateProduct(product.copyWith(
-                  actualStock: quantityProvider.actualValue,
-                  isPinned: isPinned,
-                ));
-            Navigator.pop(context);
-          },
-          tooltip: 'Save',
-          child: const Icon(Icons.save_rounded),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    width: MediaQuery.of(context).size.height * 0.4,
-                    color: Colors.grey,
-                  ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Szczegóły produktu"),
+        actions: [
+          PinButton(
+            initialValue: isPinned,
+            setPin: setPin,
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.read<ProductsCubit>().updateProduct(product.copyWith(
+                actualStock: context.read<QuantityProvider>().actualValue,
+                isPinned: isPinned,
+              ));
+          Navigator.pop(context);
+        },
+        tooltip: 'Save',
+        child: const Icon(Icons.save_rounded),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  width: MediaQuery.of(context).size.height * 0.4,
+                  color: Colors.grey,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  product.name,
-                  style: Theme.of(context).textTheme.headline5,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                product.name,
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                product.code,
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              const SizedBox(height: 16),
+              Center(
+                child: QuantityButtons(
+                  height: MediaQuery.of(context).size.height * 0.16,
+                  width: MediaQuery.of(context).size.height * 0.5,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  product.code,
-                  style: Theme.of(context).textTheme.subtitle1,
+              ),
+              const SizedBox(height: 8),
+              Center(
+                child: TextButton.icon(
+                  onPressed: null,
+                  icon: const Icon(Icons.link_rounded),
+                  label: const Text("Artykuł na stronie internetowej"),
                 ),
-                const SizedBox(height: 16),
-                Center(
-                  child: QuantityButtons(
-                    height: MediaQuery.of(context).size.height * 0.16,
-                    width: MediaQuery.of(context).size.height * 0.5,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Center(
-                  child: TextButton.icon(
-                    onPressed: null,
-                    icon: const Icon(Icons.link_rounded),
-                    label: const Text("Artykuł na stronie internetowej"),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -85,6 +85,7 @@ class SessionCard extends StatelessWidget {
                               context
                                   .read<SessionsCubit>()
                                   .restoreSession(id: session.id);
+                              Navigator.pop(context);
                             },
                             child: const Text("Przywróć"),
                           ),

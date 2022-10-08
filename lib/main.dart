@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'package:scanner_app/models/models.dart';
+import 'package:scanner_app/provider/quantity_provider.dart';
 import 'cubits/products_cubit/products_cubit.dart';
 import 'cubits/sessions_cubit/sessions_cubit.dart';
 import 'repositories/sessions_repository.dart';
@@ -68,16 +70,21 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
-      child: MaterialApp(
-        theme: theme,
-        title: 'Scanner App',
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const HomeScreen(),
-          '/product': (context) => const ProductScreen(),
-          '/sessions_history': (context) => const SessionsHistoryScreen(),
-          '/debug': (context) => const SessionsRepositoryDebugScreen(),
-        },
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => QuantityProvider()),
+        ],
+        child: MaterialApp(
+          theme: theme,
+          title: 'Scanner App',
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const HomeScreen(),
+            '/product': (context) => const ProductScreen(),
+            '/sessions_history': (context) => const SessionsHistoryScreen(),
+            '/debug': (context) => const SessionsRepositoryDebugScreen(),
+          },
+        ),
       ),
     );
   }

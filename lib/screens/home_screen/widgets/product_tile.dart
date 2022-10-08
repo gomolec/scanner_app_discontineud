@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scanner_app/constants.dart';
 
 import '../../../models/models.dart';
+import '../../../provider/quantity_provider.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
@@ -62,6 +64,8 @@ class ProductTile extends StatelessWidget {
         ],
       ),
       onTap: () {
+        context.read<QuantityProvider>().setActual(product.actualStock);
+        context.read<QuantityProvider>().setPrevious(product.previousStock);
         Navigator.pushNamed(context, '/product', arguments: product);
       },
     );

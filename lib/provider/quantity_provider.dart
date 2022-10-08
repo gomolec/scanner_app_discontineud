@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
 class QuantityProvider extends ChangeNotifier {
-  int actualValue;
-  int previousValue;
+  int actualValue = 0;
+  int previousValue = 0;
 
-  QuantityProvider({
-    required this.actualValue,
-    required this.previousValue,
-  });
-
-  void setValue(int value) {
-    if (value > 0) {
+  void setActual(int value) {
+    if (value >= 0) {
       actualValue = value;
       notifyListeners();
     }
   }
 
-  void setPreviousValue() {
+  void setPrevious(int value) {
+    if (value >= 0) {
+      previousValue = value;
+      notifyListeners();
+    }
+  }
+
+  void setToPreviousValue() {
     actualValue = previousValue;
     notifyListeners();
   }
@@ -27,7 +29,7 @@ class QuantityProvider extends ChangeNotifier {
   }
 
   void decrement() {
-    if (actualValue > 0) {
+    if (actualValue >= 0) {
       actualValue--;
       notifyListeners();
     }

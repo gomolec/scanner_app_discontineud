@@ -35,7 +35,7 @@ class QuantityButtons extends StatelessWidget {
               context.read<QuantityProvider>().decrement();
             },
             onLongPress: () {
-              context.read<QuantityProvider>().setValue(0);
+              context.read<QuantityProvider>().setActual(0);
             },
             child: AspectRatio(
               aspectRatio: 1 / 1,
@@ -59,7 +59,7 @@ class QuantityButtons extends StatelessWidget {
               children: [
                 Expanded(
                   child: Center(
-                    child: Consumer(
+                    child: Consumer<QuantityProvider>(
                       builder: (context, QuantityProvider quantity, child) {
                         controller.text = quantity.actualValue.toString();
                         return TextField(
@@ -68,7 +68,7 @@ class QuantityButtons extends StatelessWidget {
                           onSubmitted: (value) {
                             int? newValue = int.tryParse(value);
                             if (newValue != null) {
-                              quantity.setValue(newValue);
+                              quantity.setActual(newValue);
                             }
                           },
                           inputFormatters: <TextInputFormatter>[
@@ -121,7 +121,7 @@ class QuantityButtons extends StatelessWidget {
               context.read<QuantityProvider>().increment();
             },
             onLongPress: () {
-              context.read<QuantityProvider>().setPreviousValue();
+              context.read<QuantityProvider>().setToPreviousValue();
             },
             child: AspectRatio(
               aspectRatio: 1 / 1,
