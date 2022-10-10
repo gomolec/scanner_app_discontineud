@@ -32,6 +32,7 @@ class HistoryDrawer extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 8),
             Expanded(
               child: BlocBuilder<HistoryCubit, HistoryState>(
                 builder: (context, state) {

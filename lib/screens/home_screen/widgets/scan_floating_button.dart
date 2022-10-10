@@ -20,7 +20,11 @@ class ScanFloatingButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FloatingActionButton(
-                  onPressed: state is ProductsLoaded ? () {} : null,
+                  onPressed: state is ProductsLoaded
+                      ? () {
+                          Navigator.pushNamed(context, '/scanner');
+                        }
+                      : null,
                   tooltip: 'Scan',
                   child: const Icon(Icons.document_scanner_rounded),
                 ),
