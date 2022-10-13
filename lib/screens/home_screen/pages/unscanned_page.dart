@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:scanner_app/models/models.dart';
-
 import '../../../cubits/products_cubit/products_cubit.dart';
 import '../../../cubits/sessions_cubit/sessions_cubit.dart';
 import '../widgets/product_tile.dart';
@@ -15,13 +12,10 @@ class UnscannedPage extends StatelessWidget {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoaded) {
-          List<Product> unscannedProducts = state.products
-              .where((element) => element.actualStock < element.previousStock)
-              .toList();
           return ListView.builder(
-            itemCount: unscannedProducts.length,
+            itemCount: state.unscannedProducts.length,
             itemBuilder: (BuildContext context, int index) {
-              return ProductTile(product: unscannedProducts[index]);
+              return ProductTile(product: state.unscannedProducts[index]);
             },
           );
         } else {

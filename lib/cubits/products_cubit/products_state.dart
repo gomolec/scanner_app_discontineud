@@ -10,12 +10,14 @@ abstract class ProductsState extends Equatable {
 class ProductsInitial extends ProductsState {}
 
 class ProductsLoaded extends ProductsState {
-  final List<Product> products;
+  final List<Product> scannedProducts;
+  final List<Product> unscannedProducts;
 
   const ProductsLoaded({
-    required this.products,
+    required this.scannedProducts,
+    required this.unscannedProducts,
   });
 
   @override
-  List<Object> get props => [products];
+  List<Object> get props => [scannedProducts, unscannedProducts];
 }

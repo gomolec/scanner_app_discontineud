@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:scanner_app/screens/scanner_screen/scanner_screen.dart';
 
 import '/models/models.dart';
 import '/providers/quantity_provider.dart';
@@ -20,7 +19,6 @@ import 'dart:convert';
 
 import 'debug/sessions_repository_debug_screen.dart';
 import 'screens/screens.dart';
-import 'screens/sessions_history_screen/sessions_history_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

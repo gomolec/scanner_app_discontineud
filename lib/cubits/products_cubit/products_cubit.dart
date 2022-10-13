@@ -46,7 +46,14 @@ class ProductsCubit extends Cubit<ProductsState> {
     List<Product> newProducts = _sorter.sortByPinned(
       _querier.query(products, searchQuery),
     );
-    emit(ProductsLoaded(products: newProducts));
+    emit(ProductsLoaded(
+      unscannedProducts: newProducts
+          .where((element) => element.actualStock < element.previousStock)
+          .toList(),
+      scannedProducts: newProducts
+          .where((element) => element.actualStock >= element.previousStock)
+          .toList(),
+    ));
   }
 
   void updateProduct(Product updatedProduct) {
