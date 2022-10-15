@@ -40,10 +40,10 @@
     "layoutBehavior": "padded",
     "minWidth": 88,
     "padding": {
-      "bottom": 0,
+      "bottom": 8,
       "left": 16,
       "right": 16,
-      "top": 0
+      "top": 8
     },
     "shape": {
       "borderRadius": {

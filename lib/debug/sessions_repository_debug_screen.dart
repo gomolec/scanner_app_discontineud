@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:scanner_app/debug/export_service_debug_screen.dart';
 
 import 'products_repository_debug_screen.dart';
 
@@ -91,6 +92,23 @@ class SessionsRepositoryDebugScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            heroTag: "btn1",
+            child: const Icon(Icons.download_rounded),
+            onPressed: () {
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) =>
+                      const ExportServiceDebugScreen(),
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          FloatingActionButton(
+            heroTag: "btn2",
             child: const Icon(Icons.add),
             onPressed: () async {
               await sessionsRepository.createNewSession(author: 'TEST');

@@ -8,10 +8,12 @@ import '/providers/quantity_provider.dart';
 import 'cubits/history_cubit/history_cubit.dart';
 import 'cubits/products_cubit/products_cubit.dart';
 import 'cubits/sessions_cubit/sessions_cubit.dart';
+import 'cubits/settings_cubit/settings_cubit.dart';
 import 'providers/search_bar_provider.dart';
 import 'repositories/sessions_repository.dart';
 import 'repositories/history_repository.dart';
 import 'repositories/products_repository.dart';
+import 'repositories/settings_repository.dart';
 
 import 'package:json_theme/json_theme.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
   late final HistoryRepository historyRepository = HistoryRepository(
     hiveInterface: hiveInterface,
   );
+  late final SettingsRepository settingsRepository = SettingsRepository(
+    hiveInterface: hiveInterface,
+  );
   late final SessionsRepository sessionsRepository = SessionsRepository(
     hiveInterface: hiveInterface,
     productsRepository: productsRepository,
@@ -61,6 +66,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => SettingsCubit(settingsRepository),
+        ),
         BlocProvider(
           create: (context) => SessionsCubit(
             sessionsRepository: sessionsRepository,
@@ -93,6 +101,7 @@ class MyApp extends StatelessWidget {
             '/product': (context) => const ProductScreen(),
             '/sessions_history': (context) => const SessionsHistoryScreen(),
             '/scanner': (context) => ScannerScreen(),
+            '/settings': (context) => const SettingsScreen(),
             '/debug': (context) => const SessionsRepositoryDebugScreen(),
           },
         ),

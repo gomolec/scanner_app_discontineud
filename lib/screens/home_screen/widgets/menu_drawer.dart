@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:scanner_app/constants.dart';
+import 'package:scanner_app/cubits/settings_cubit/settings_cubit.dart';
 
 import '../../../cubits/products_cubit/products_cubit.dart';
 import '../../../cubits/sessions_cubit/sessions_cubit.dart';
@@ -89,8 +90,10 @@ class MenuDrawer extends StatelessWidget {
                           height: 2,
                         ),
                         Text(
-                          //TODO dodac nazwe uzytkownika
-                          "nazwa użytkownika",
+                          context
+                              .read<SettingsCubit>()
+                              .settings["author"]
+                              .toString(),
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onPrimary,
                           ),
@@ -123,7 +126,7 @@ class MenuDrawer extends StatelessWidget {
               leading: const Icon(Icons.settings_rounded),
               title: const Text("Ustawienia"),
               onTap: () {
-                //Navigator.popAndPushNamed(context, "/sessions_history");
+                Navigator.popAndPushNamed(context, "/settings");
               },
             ),
             ListTile(
