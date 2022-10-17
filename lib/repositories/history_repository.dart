@@ -123,4 +123,28 @@ class HistoryRepository {
     }
     return false;
   }
+
+  Future<void> importHistorySession({
+    required String id,
+    required List<HistoryAction> importedHistoryActions,
+  }) async {
+    final Box<HistoryAction> importedHistoryBox =
+        await hiveInterface.openBox("history-$id");
+
+    importedHistoryBox.addAll(importedHistoryActions);
+
+    importedHistoryBox.close();
+  }
+
+  Future<List<HistoryAction>> exportHistorySession({required String id}) async {
+    final Box<HistoryAction> exportedHistoryBox =
+        await hiveInterface.openBox("history-$id");
+
+    final List<HistoryAction> exportedHistoryActions =
+        exportedHistoryBox.values.toList();
+
+    exportedHistoryBox.close();
+
+    return exportedHistoryActions;
+  }
 }

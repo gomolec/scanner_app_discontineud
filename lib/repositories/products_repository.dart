@@ -83,4 +83,26 @@ class ProductsRepository {
       _productsBox!.delete(id);
     }
   }
+
+  Future<void> importProductsSession({
+    required String id,
+    required Map<int, Product> importedProducts,
+  }) async {
+    final Box<Product> importedProductsBox =
+        await hiveInterface.openBox("products-$id");
+
+    await importedProductsBox.putAll(importedProducts);
+  }
+
+  Future<Map<int, Product>> exportProductsSession({required String id}) async {
+    final Box<Product> exportedProductsBox =
+        await hiveInterface.openBox("products-$id");
+
+    final Map<int, Product> exportedProducts =
+        Map<int, Product>.from(exportedProductsBox.toMap());
+
+    exportedProductsBox.close();
+
+    return exportedProducts;
+  }
 }

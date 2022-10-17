@@ -5,6 +5,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/models.dart';
+import '../services/export_service.dart';
+import '../services/import_service.dart';
 import 'history_repository.dart';
 import 'products_repository.dart';
 
@@ -98,5 +100,38 @@ class SessionsRepository {
       await historyRepository.openHistorySession(id);
     }
     return session;
+  }
+
+  Future<void> importSession() async {
+    final Map? importedSessionData =
+        await ImportService().importSessionFromJson();
+
+    if (importedSessionData != null) {
+      await _sessionsBox!.add(importedSessionData["session"]);
+
+      await productsRepository.importProductsSession(
+        id: importedSessionData["session"].id,
+        importedProducts: importedSessionData["products"],
+      );
+
+      await historyRepository.importHistorySession(
+        id: importedSessionData["session"].id,
+        importedHistoryActions: importedSessionData["historyActions"],
+      );
+
+      addToStream(_sessionsBox!.values.toList());
+    }
+  }
+
+  Future<void> exportSession({required String id}) async {
+    final Session? exportedSession = findById(id);
+
+    if (exportedSession != null) {
+      await ExportService().exportSessionToJson(
+        session: exportedSession,
+        products: await productsRepository.exportProductsSession(id: id),
+        historyActions: await historyRepository.exportHistorySession(id: id),
+      );
+    }
   }
 }

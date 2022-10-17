@@ -62,6 +62,14 @@ class SessionsCubit extends Cubit<SessionsState> {
     }
   }
 
+  void importSession() async {
+    await sessionsRepository.importSession();
+  }
+
+  void exportSession({required String id}) async {
+    await sessionsRepository.exportSession(id: id);
+  }
+
   @override
   Future<void> close() {
     _subscription.cancel();

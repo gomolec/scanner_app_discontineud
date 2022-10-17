@@ -9,6 +9,7 @@ import 'cubits/history_cubit/history_cubit.dart';
 import 'cubits/products_cubit/products_cubit.dart';
 import 'cubits/sessions_cubit/sessions_cubit.dart';
 import 'cubits/settings_cubit/settings_cubit.dart';
+import 'globals.dart';
 import 'providers/search_bar_provider.dart';
 import 'repositories/sessions_repository.dart';
 import 'repositories/history_repository.dart';
@@ -68,23 +69,27 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => SettingsCubit(settingsRepository),
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => SessionsCubit(
             sessionsRepository: sessionsRepository,
           ),
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => ProductsCubit(
             productsRepository: productsRepository,
             historyRepository: historyRepository,
           ),
+          lazy: false,
         ),
         BlocProvider(
           create: (context) => HistoryCubit(
             historyRepository: historyRepository,
             productsRepository: productsRepository,
           ),
+          lazy: false,
         ),
       ],
       child: MultiProvider(
@@ -95,6 +100,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           theme: theme,
           title: 'Scanner App',
+          scaffoldMessengerKey: snackbarKey,
           initialRoute: '/',
           routes: {
             '/': (context) => const HomeScreen(),

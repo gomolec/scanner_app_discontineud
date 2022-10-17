@@ -12,13 +12,28 @@ class SessionsHistoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Historia sesji"),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<SessionsCubit>().createNewSession();
-          Navigator.pop(context);
-        },
-        tooltip: 'Create session',
-        child: const Icon(Icons.add_box_outlined),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            heroTag: "import_floating_button",
+            onPressed: () {
+              context.read<SessionsCubit>().importSession();
+            },
+            tooltip: 'Import session',
+            child: const Icon(Icons.download_rounded),
+          ),
+          const SizedBox(width: 8),
+          FloatingActionButton(
+            heroTag: "create_floating_button",
+            onPressed: () {
+              context.read<SessionsCubit>().createNewSession();
+              Navigator.pop(context);
+            },
+            tooltip: 'Create session',
+            child: const Icon(Icons.add_box_outlined),
+          ),
+        ],
       ),
       body: BlocBuilder<SessionsCubit, SessionsState>(
         builder: (context, state) {

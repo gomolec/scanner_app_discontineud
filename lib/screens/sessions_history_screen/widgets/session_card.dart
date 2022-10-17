@@ -70,7 +70,9 @@ class SessionCard extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                     child: TextButton(
                       onPressed: () {
-                        //TODO dodać możliwość eksportu
+                        context
+                            .read<SessionsCubit>()
+                            .exportSession(id: session.id);
                       },
                       child: const Text("Eksportuj"),
                     ),
