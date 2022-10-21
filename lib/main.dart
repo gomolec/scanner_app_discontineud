@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:scanner_app/providers/csv_import_provider.dart';
 
 import '/models/models.dart';
 import '/providers/quantity_provider.dart';
@@ -21,6 +22,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 
 import 'debug/sessions_repository_debug_screen.dart';
+import 'screens/import_screen/import_screen.dart';
 import 'screens/screens.dart';
 
 void main() async {
@@ -74,6 +76,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SessionsCubit(
             sessionsRepository: sessionsRepository,
+            settingsRepository: settingsRepository,
           ),
           lazy: false,
         ),
@@ -107,6 +110,7 @@ class MyApp extends StatelessWidget {
             '/product': (context) => const ProductScreen(),
             '/sessions_history': (context) => const SessionsHistoryScreen(),
             '/scanner': (context) => ScannerScreen(),
+            '/import': (context) => const ImportScreen(),
             '/settings': (context) => const SettingsScreen(),
             '/debug': (context) => const SessionsRepositoryDebugScreen(),
           },

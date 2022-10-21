@@ -52,6 +52,18 @@ class ImportExportServiceDebugScreen extends StatelessWidget {
               child: const Text("Test Import"),
             ),
           ),
+          const SizedBox(height: 16),
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                final String importedData = await DefaultAssetBundle.of(context)
+                    .loadString('assets/html_table.txt');
+
+                await importService.importFromHtmlTable(importedData);
+              },
+              child: const Text("Test Import From HTML Table"),
+            ),
+          ),
         ],
       ),
     );

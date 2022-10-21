@@ -60,13 +60,15 @@ class MenuDrawer extends StatelessWidget {
                           ),
                           SessionStatisicsTile(
                             title: "Zeskanowane produkty:",
-                            subtitle:
-                                "${state.scannedProducts.length} / ${state.scannedProducts.length + state.unscannedProducts.length} rodzajów",
+                            subtitle: state.unscannedProducts.isEmpty
+                                ? "Brak produktów"
+                                : "${state.scannedProducts.length} / ${state.scannedProducts.length + state.unscannedProducts.length} rodzajów",
                           ),
                           SessionStatisicsTile(
                             title: "Proces skanowania:",
-                            subtitle:
-                                "${((state.scannedProducts.length * 100) / (state.scannedProducts.length + state.unscannedProducts.length)).round()} %",
+                            subtitle: state.unscannedProducts.isEmpty
+                                ? "Brak produktów"
+                                : "${((state.scannedProducts.length * 100) / (state.scannedProducts.length + state.unscannedProducts.length)).round()} %",
                           ),
                         ],
                       );
@@ -118,8 +120,8 @@ class MenuDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.upload_rounded),
               title: const Text("Import"),
-              onTap: () {
-                //Navigator.popAndPushNamed(context, "/sessions_history");
+              onTap: () async {
+                Navigator.popAndPushNamed(context, "/import");
               },
             ),
             ListTile(

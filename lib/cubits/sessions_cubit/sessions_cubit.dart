@@ -1,17 +1,23 @@
 import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:scanner_app/models/models.dart';
+
 import '../../repositories/sessions_repository.dart';
+import '../../repositories/settings_repository.dart';
 
 part 'sessions_state.dart';
 
 class SessionsCubit extends Cubit<SessionsState> {
   final SessionsRepository sessionsRepository;
+  final SettingsRepository settingsRepository;
   late final StreamSubscription _subscription;
 
   SessionsCubit({
     required this.sessionsRepository,
+    required this.settingsRepository,
   }) : super(SessionsInitial()) {
     _subscribe();
     sessionsRepository.getSavedSessions();
@@ -19,7 +25,6 @@ class SessionsCubit extends Cubit<SessionsState> {
 
   List<Session> sessions = [];
   Session? actualSession;
-  String? author;
 
   void _subscribe() {
     _subscription = sessionsRepository.sessions.listen(
@@ -35,7 +40,8 @@ class SessionsCubit extends Cubit<SessionsState> {
   }
 
   void createNewSession() async {
-    actualSession = await sessionsRepository.createNewSession(author: author);
+    actualSession = await sessionsRepository.createNewSession(
+        author: settingsRepository.getSetting("author"));
   }
 
   void restoreSession({required String id}) async {
@@ -68,6 +74,24 @@ class SessionsCubit extends Cubit<SessionsState> {
 
   void exportSession({required String id}) async {
     await sessionsRepository.exportSession(id: id);
+  }
+
+  void importSessionFromHtmlTable(String data) async {
+    await sessionsRepository.importSessionFromHtmlTable(
+      author: settingsRepository.getSetting("author"),
+      data: data,
+    );
+  }
+
+  void importSessionFromCsv({
+    required Map<String, int?> csvStructure,
+    required List<List<String>> importedCsvList,
+  }) async {
+    await sessionsRepository.importSessionFromCsv(
+      author: settingsRepository.getSetting("author"),
+      csvStructure: csvStructure,
+      importedCsvList: importedCsvList,
+    );
   }
 
   @override

@@ -134,4 +134,72 @@ class SessionsRepository {
       );
     }
   }
+
+  Future<void> importSessionFromHtmlTable({
+    String? author,
+    required String data,
+  }) async {
+    final Map<int, Product>? importedProductsData =
+        await ImportService().importFromHtmlTable(data);
+
+    if (importedProductsData != null) {
+      final newSession = Session(
+        id: const Uuid().v1(),
+        startDate: DateTime.now(),
+        author: author,
+      );
+      if (_sessionsBox!.length >= maxStoredSessions) {
+        await deleteSession(_sessionsBox!.values.toList().first.id);
+      }
+      await _sessionsBox!.add(newSession);
+
+      await productsRepository.importProductsSession(
+        id: newSession.id,
+        importedProducts: importedProductsData,
+      );
+
+      await historyRepository.importHistorySession(
+        id: newSession.id,
+        importedHistoryActions: [],
+      );
+
+      addToStream(_sessionsBox!.values.toList());
+    }
+  }
+
+  Future<void> importSessionFromCsv({
+    String? author,
+    required Map<String, int?> csvStructure,
+    required List<List<String>> importedCsvList,
+  }) async {
+    final Map<int, Product>? importedProductsData =
+        await ImportService().importFromCsv(
+      csvStructure: csvStructure,
+      importedCsvList: importedCsvList,
+    );
+
+    if (importedProductsData != null) {
+      final newSession = Session(
+        id: const Uuid().v1(),
+        startDate: DateTime.now(),
+        author: author,
+      );
+      if (_sessionsBox!.length >= maxStoredSessions) {
+        await deleteSession(_sessionsBox!.values.toList().first.id);
+      }
+      await _sessionsBox!.add(newSession);
+
+      await productsRepository.importProductsSession(
+        id: newSession.id,
+        importedProducts: importedProductsData,
+      );
+
+      await historyRepository.importHistorySession(
+        id: newSession.id,
+        importedHistoryActions: [],
+      );
+
+      addToStream(_sessionsBox!.values.toList());
+    }
+  }
 }

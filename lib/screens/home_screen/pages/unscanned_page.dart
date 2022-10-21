@@ -9,10 +9,13 @@ class UnscannedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController controller = ScrollController();
+
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
         if (state is ProductsLoaded) {
           return ListView.builder(
+            controller: controller,
             itemCount: state.unscannedProducts.length,
             itemBuilder: (BuildContext context, int index) {
               return ProductTile(product: state.unscannedProducts[index]);

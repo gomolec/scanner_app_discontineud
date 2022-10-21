@@ -1,0 +1,235 @@
+Lp.	Kod (rozmiar)	Nazwa	Lokalizacja	Ilość	Uśredniona cena jedn. zakupu brutto	Uśredniona cena jedn. zakupu netto	VAT
+1	692
+5902270354225	Baton Daktylowy z kokosem i nerkowcami 40g	 	60 szt.	n.d.	n.d.	n.d.
+2	690
+5902270354232	Baton Daktylowy z kakao i orzechami 40g	 	60 szt.	n.d.	n.d.	n.d.
+3	691
+5902270354201	Baton Daktylowy z migdałami 40g	 	40 szt.	n.d.	n.d.	n.d.
+4	693
+5902270354218	Baton Daktylowy z orzechami mix 40g	 	40 szt.	n.d.	n.d.	n.d.
+5	918
+5902270354911	Baton Daktylowy jabłko cynamon z orzechami włoskimi 40g	 	40 szt.	n.d.	n.d.	n.d.
+6	1024
+5902270355185	Baton Daktylowy piernikowy 40g	 	30 szt.	n.d.	n.d.	n.d.
+7	917
+5902270354904	Baton Daktylowy z kokosem i kawą 40g	 	30 szt.	n.d.	n.d.	n.d.
+8	689
+5902270354195	Baton Daktylowy z orzechami ziemnymi 40g	 	20 szt.	n.d.	n.d.	n.d.
+9	916
+5902270354928	Baton Daktylowy z bananem i surowym kakao 40g	 	20 szt.	n.d.	n.d.	n.d.
+10	523878
+5902270359022	Kokosek baton w czekoladzie 33g	 	60 szt.	n.d.	n.d.	n.d.
+11	523879
+5902270359039	Migdałek baton w czekoladzie 33g	 	40 szt.	n.d.	n.d.	n.d.
+12	523880
+5902270359008	Orzeszek baton w czekoladzie 33g	 	20 szt.	n.d.	n.d.	n.d.
+13	523881
+5902270359015	Orzeszek z kakao baton w czekoladzie 33g	 	20 szt.	n.d.	n.d.	n.d.
+14	522987
+5902270357370	Batonik Daktylowy ciasteczkowy 20g	 	50 szt.	n.d.	n.d.	n.d.
+15	523063
+5902270357523	Batonik Daktylowy kokos truskawka 20g	 	30 szt.	n.d.	n.d.	n.d.
+16	523064
+5902270357516	Batonik Daktylowy kokos banan 20g	 	20 szt.	n.d.	n.d.	n.d.
+17	523419
+5902270357592	Baton Daktylowy słony karmel w czekoladzie 33g	 	60 szt.	n.d.	n.d.	n.d.
+18	523422
+5902270357622	Baton Daktylowy jesienny w czekoladzie 33g	 	50 szt.	n.d.	n.d.	n.d.
+19	523420
+5902270357608	Baton Daktylowy wiśniowy w czekoladzie 33g	 	30 szt.	n.d.	n.d.	n.d.
+20	523778
+5902270358698	Baton Daktylowy piernik w czekoladzie 33g	 	20 szt.	n.d.	n.d.	n.d.
+21	523421
+5902270357615	Baton Daktylowy tropikalny w czekoladzie 33g	 	20 szt.	n.d.	n.d.	n.d.
+22	350
+5902270352528	Ryż jaśminowy 1kg	 	10 szt.	n.d.	n.d.	n.d.
+23	467
+5902270352498	Ryż basmati 1kg	 	10 szt.	n.d.	n.d.	n.d.
+24	198
+5902270350708	Amarantus ziarno 500g	 	2 szt.	n.d.	n.d.	n.d.
+25	62
+5902270350692	Amarantus ziarno 1kg	 	2 szt.	n.d.	n.d.	n.d.
+26	349
+5902270352535	Ryż brązowy naturalny 1kg	 	6 szt.	n.d.	n.d.	n.d.
+27	468
+5902270352801	Ryż arborio do risotto 1kg	 	4 szt.	n.d.	n.d.	n.d.
+28	224
+5902270350722	Kasza gryczana biała 1kg	 	4 szt.	n.d.	n.d.	n.d.
+29	20
+5902270350142	Orzechy macadamia 100g	 	2 szt.	n.d.	n.d.	n.d.
+30	355
+5902270350166	Orzechy nerkowca 300g	 	6 szt.	n.d.	n.d.	n.d.
+31	229
+5902270350111	Orzechy brazylijskie 1kg	 	4 szt.	n.d.	n.d.	n.d.
+32	19
+5902270350128	Orzechy brazylijskie 500g	 	4 szt.	n.d.	n.d.	n.d.
+33	22
+5902270350159	Orzechy nerkowca 700g	 	2 szt.	n.d.	n.d.	n.d.
+34	24
+5902270350197	Orzechy włoskie łuskane 500g	 	10 szt.	n.d.	n.d.	n.d.
+35	17
+5902270350074	Migdały kalifornijskie 500g	 	2 szt.	n.d.	n.d.	n.d.
+36	522931
+5902270357097	Chałwa turecka kawowa bez cukru 300g	 	6 szt.	n.d.	n.d.	n.d.
+37	26
+5902270350227	Cukier kokosowy 500g	 	2 szt.	n.d.	n.d.	n.d.
+38	27
+5902270350258	Erytrol (Erytrytol ) 1kg	 	12 szt.	n.d.	n.d.	n.d.
+39	522834
+5902270356816	Solony migdał w czekoladzie bez dodatku cukru 150g	 	4 szt.	n.d.	n.d.	n.d.
+40	524001
+5902270359527	Frużelina Owoce w żelu Brzoskwinia 500g	 	10 szt.	n.d.	n.d.	n.d.
+41	523850
+5902270359091	Frużelina Owoce w żelu Jabłko z cynamonem 500g	 	4 szt.	n.d.	n.d.	n.d.
+42	523995
+5902270359534	Zestaw MIX Frużelin 8 x 180 g	 	6 szt.	n.d.	n.d.	n.d.
+43	34
+5902270350364	Hibiskus 300g	 	4 szt.	n.d.	n.d.	n.d.
+44	1127
+5902270355758	Rooibos 100g	 	4 szt.	n.d.	n.d.	n.d.
+45	523740
+5902270358520	Kawa rozpuszczalna Czekoladowa 130g	 	2 szt.	n.d.	n.d.	n.d.
+46	335
+5902270351774	Mąka gryczana 1kg	 	2 szt.	n.d.	n.d.	n.d.
+47	428
+5902270352597	Pasta Orzechowa 100% 900g	 	24 szt.	n.d.	n.d.	n.d.
+48	166
+5902270352146	Pasta Orzechowa 100% 500g	 	8 szt.	n.d.	n.d.	n.d.
+49	211
+5902270352184	Pasta Orzechowa 100% z Solą Himalajską 500g	 	8 szt.	n.d.	n.d.	n.d.
+50	577
+5902270356359	Pasta Orzechowa Crunchy z kawałkami orzechów 100% 900g	 	6 szt.	n.d.	n.d.	n.d.
+51	523569
+5902270358209	Marta Gorąca Pasta orzechowa z kokosem Duża zawartość białka 500g	 	4 szt.	n.d.	n.d.	n.d.
+52	522550
+5902270356373	Pasta z nerkowców 900g	 	4 szt.	n.d.	n.d.	n.d.
+53	523302
+5902270357868	Czekopistacja pasta z pistacji z białą czekoladą 150g	 	4 szt.	n.d.	n.d.	n.d.
+54	688
+5902270354188	Pasta dyniowa 300g z pestek dyni	 	4 szt.	n.d.	n.d.	n.d.
+55	687
+5902270354164	Pasta chałwowa 300g Naturalna	 	4 szt.	n.d.	n.d.	n.d.
+56	522960
+5902270357172	Czekociacho słodka pasta z ciasteczkami 300g	 	4 szt.	n.d.	n.d.	n.d.
+57	522734
+5902270356564	Chrupiąca pasta migdałowa z kokosem 300g	 	6 szt.	n.d.	n.d.	n.d.
+58	522551
+5902270356366	Pasta migdałowa 900g	 	2 szt.	n.d.	n.d.	n.d.
+59	435
+5902270352641	Pasta z nerkowców 300g	 	12 szt.	n.d.	n.d.	n.d.
+60	436
+5902270352658	Pasta z pistacji 150g	 	14 szt.	n.d.	n.d.	n.d.
+61	522881
+5902270356908	Słodka Czekokrówka 300g	 	4 szt.	n.d.	n.d.	n.d.
+62	522923
+5902270357080	Mleczna Czekokrówka - Słony karmel 300g	 	4 szt.	n.d.	n.d.	n.d.
+63	630
+5902270354089	Pasta orzechowa ze słonym karmelem 300g	 	4 szt.	n.d.	n.d.	n.d.
+64	1011
+5902270355178	Krukers Lajt chrupiąca pasta orzechowa 300g	 	4 szt.	n.d.	n.d.	n.d.
+65	1003
+5902270355086	Krukers chrupiąca pasta orzechowa 300g	 	4 szt.	n.d.	n.d.	n.d.
+66	631
+5902270354065	Pasta orzechowa z kokosem 300g	 	4 szt.	n.d.	n.d.	n.d.
+67	567
+5902270353846	Pasta kokosowa słodzona 300g	 	2 szt.	n.d.	n.d.	n.d.
+68	990
+5902270355017	Pasta Orzechowa z ciasteczkami 300g	 	2 szt.	n.d.	n.d.	n.d.
+69	1162
+5902270355192	Pasta migdałowa Crunchy 300g	 	8 szt.	n.d.	n.d.	n.d.
+70	1004
+5902270355093	Oliwa z oliwek Extra Virgin 500ml Grecja	 	6 szt.	n.d.	n.d.	n.d.
+71	444
+5902270352726	Olej z czarnuszki tłoczony na zimno 250ml	 	2 szt.	n.d.	n.d.	n.d.
+72	522356
+5902270355505	Olej słonecznikowy tłoczony na zimno 250ml	 	1 szt.	n.d.	n.d.	n.d.
+73	445
+5902270352733	Olej z ostropestu tłoczony na zimno 250ml	 	2 szt.	n.d.	n.d.	n.d.
+74	202
+5902270350852	Olej KOKOSOWY 200ml Extra Virgin Zimnotłoczony	 	2 szt.	n.d.	n.d.	n.d.
+75	565
+5902270353839	Olej rzepakowy tłoczony na zimno 1l	 	2 szt.	n.d.	n.d.	n.d.
+76	345
+5902270350845	Olej KOKOSOWY 500ml Extra Virgin Zimnotłoczony	 	4 szt.	n.d.	n.d.	n.d.
+77	223
+5902270351965	Płatki orkiszowe 500g	 	6 szt.	n.d.	n.d.	n.d.
+78	81
+5902270350913	Płatki żytnie 1kg	 	2 szt.	n.d.	n.d.	n.d.
+79	522771
+5902270356717	Kulki kukurydziane 100g	 	2 szt.	n.d.	n.d.	n.d.
+80	522772
+5902270356724	Kulki ryżowe 100g	 	2 szt.	n.d.	n.d.	n.d.
+81	927
+5902270354935	Płatki owsiane błyskawiczne 1kg	 	4 szt.	n.d.	n.d.	n.d.
+82	465
+5902270352832	Płatki drożdżowe nieaktywne 250g	 	4 szt.	n.d.	n.d.	n.d.
+83	432
+5902270352610	Płatki kukurydziane śniadaniowe 300g	 	4 szt.	n.d.	n.d.	n.d.
+84	78
+5902270350890	Płatki owsiane 1kg	 	4 szt.	n.d.	n.d.	n.d.
+85	523788
+5902270358865	Błonnik owsiany rozpuszczalny 500g	 	1 szt.	n.d.	n.d.	n.d.
+86	83
+5902270352320	Błonnik Naturalny Babka Płesznik Jajowata 100g	 	2 szt.	n.d.	n.d.	n.d.
+87	85
+5902270350951	Nasiona Chia Szałwia hiszpańska 1kg	 	2 szt.	n.d.	n.d.	n.d.
+88	366
+5902270351859	Babka płesznik ziarno 500g z POLSKI	 	2 szt.	n.d.	n.d.	n.d.
+89	255
+5902270350975	Nasiona Chia Szałwia hiszpańska 250g	 	4 szt.	n.d.	n.d.	n.d.
+90	97
+5902270351071	Siemię lniane złote 1kg	 	4 szt.	n.d.	n.d.	n.d.
+91	96
+5902270351064	Siemię lniane 1kg	 	4 szt.	n.d.	n.d.	n.d.
+92	365
+5902270352566	Popcorn PREMIUM ziarno kukurydza do prażenia 1kg	 	6 szt.	n.d.	n.d.	n.d.
+93	147
+5902270351194	Chipsy kokosowe KOKOS 200g	 	2 szt.	n.d.	n.d.	n.d.
+94	226
+5902270351200	Chipsy kokosowe KOKOS 400g	 	2 szt.	n.d.	n.d.	n.d.
+95	261
+5902270351125	Sól himalajska drobnoziarnista 1kg	 	4 szt.	n.d.	n.d.	n.d.
+96	156
+5902270351675	Mieszanka studencka 500g	 	8 szt.	n.d.	n.d.	n.d.
+97	155
+5902270351682	Mieszanka studencka 1kg	 	4 szt.	n.d.	n.d.	n.d.
+98	522370
+5902270351286	Mango suszone naturalne kawałki 250g	 	4 szt.	n.d.	n.d.	n.d.
+99	149
+5902270351910	Figi suszone niesiarkowane bez SO2 500g	 	10 szt.	n.d.	n.d.	n.d.
+100	252
+5902270351309	Morele suszone NIESIARKOWANE 500g	 	2 szt.	n.d.	n.d.	n.d.
+101	523152
+5902270357837	Wiśnie suszone bez dodatku cukru z pestkami 100g	 	2 szt.	n.d.	n.d.	n.d.
+102	148
+5902270351217	Daktyle suszone 600g	 	10 szt.	n.d.	n.d.	n.d.
+103	146
+5902270351187	Chipsy bananowe 400g	 	2 szt.	n.d.	n.d.	n.d.
+104	242
+5902270351231	Jagody Goji suszone 500g	 	2 szt.	n.d.	n.d.	n.d.
+105	164
+5902270351408	Śliwki suszone kalifornijskie 500g	 	2 szt.	n.d.	n.d.	n.d.
+106	104
+5902270351644	Czarnuszka 100g Czarny kminek Nasiona czarnuszki	 	2 szt.	n.d.	n.d.	n.d.
+107	517
+5902270353211	Czubryca Czubrica zielona 60g	 	6 szt.	n.d.	n.d.	n.d.
+108	522466
+5902270353334	Koper włoski 50g	 	2 szt.	n.d.	n.d.	n.d.
+109	522478
+5902270356069	Pieprz ziołowy 50g	 	4 szt.	n.d.	n.d.	n.d.
+110	114
+5902270353204	Kolendra mielona 50g	 	4 szt.	n.d.	n.d.	n.d.
+111	522469
+5902270355970	Liście laurowe 50g	 	2 szt.	n.d.	n.d.	n.d.
+112	497
+5902270353396	Kurkuma 50g	 	10 szt.	n.d.	n.d.	n.d.
+113	537
+5902270353440	Lubczyk suszony 30g	 	4 szt.	n.d.	n.d.	n.d.
+114	536
+5902270353488	Oregano lebiodka pospolita 30g	 	4 szt.	n.d.	n.d.	n.d.
+115	547
+5902270353266	Goździki całe aromatyczne 30g	 	4 szt.	n.d.	n.d.	n.d.
+116	522471
+5902270355994	Papryka słodka 50g	 	6 szt.	n.d.	n.d.	n.d.
+117	103
+5902270353198	Cynamon mielony 50g	 	4 szt.	n.d.	n.d.	n.d.
