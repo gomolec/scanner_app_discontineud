@@ -102,7 +102,7 @@ class SessionsRepository {
     return session;
   }
 
-  Future<void> importSession() async {
+  Future<void> importSessionFromJson() async {
     final Map? importedSessionData =
         await ImportService().importSessionFromJson();
 
@@ -123,7 +123,7 @@ class SessionsRepository {
     }
   }
 
-  Future<void> exportSession({required String id}) async {
+  Future<void> exportSessionToJson({required String id}) async {
     final Session? exportedSession = findById(id);
 
     if (exportedSession != null) {
@@ -192,6 +192,7 @@ class SessionsRepository {
       await productsRepository.importProductsSession(
         id: newSession.id,
         importedProducts: importedProductsData,
+        generateNewIds: true,
       );
 
       await historyRepository.importHistorySession(
@@ -200,6 +201,17 @@ class SessionsRepository {
       );
 
       addToStream(_sessionsBox!.values.toList());
+    }
+  }
+
+  Future<void> exportSessionToCsv({required String id}) async {
+    final Session? exportedSession = findById(id);
+
+    if (exportedSession != null) {
+      await ExportService().exportToCsv(
+        session: exportedSession,
+        products: await productsRepository.exportProductsSession(id: id),
+      );
     }
   }
 }

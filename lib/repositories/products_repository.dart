@@ -87,11 +87,20 @@ class ProductsRepository {
   Future<void> importProductsSession({
     required String id,
     required Map<int, Product> importedProducts,
+    bool generateNewIds = false,
   }) async {
     final Box<Product> importedProductsBox =
         await hiveInterface.openBox("products-$id");
 
-    await importedProductsBox.putAll(importedProducts);
+    if (generateNewIds == false) {
+      await importedProductsBox.putAll(importedProducts);
+    } else {
+      int id = 0;
+      for (var product in importedProducts.values) {
+        importedProductsBox.put(id, product.copyWith(id: id));
+        id++;
+      }
+    }
   }
 
   Future<Map<int, Product>> exportProductsSession({required String id}) async {

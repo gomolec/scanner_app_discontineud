@@ -25,8 +25,8 @@ class CsvImportProvider extends ChangeNotifier {
     return importedCsvList;
   }
 
-  updateIsFirstRowData(bool value) {
-    isFirstRowData = value;
+  updateIsFirstRowData() {
+    isFirstRowData = !isFirstRowData;
     notifyListeners();
   }
 }

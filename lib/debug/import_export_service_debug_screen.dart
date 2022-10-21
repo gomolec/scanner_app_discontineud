@@ -64,6 +64,18 @@ class ImportExportServiceDebugScreen extends StatelessWidget {
               child: const Text("Test Import From HTML Table"),
             ),
           ),
+          const SizedBox(height: 16),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                exportService.exportToCsv(
+                  session: testSession,
+                  products: testProducts,
+                );
+              },
+              child: const Text("Test Export To CSV"),
+            ),
+          ),
         ],
       ),
     );

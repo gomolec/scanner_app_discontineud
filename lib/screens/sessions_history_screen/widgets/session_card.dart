@@ -72,7 +72,7 @@ class SessionCard extends StatelessWidget {
                       onPressed: () {
                         context
                             .read<SessionsCubit>()
-                            .exportSession(id: session.id);
+                            .exportSessionToCsv(id: session.id);
                       },
                       child: const Text("Eksportuj"),
                     ),

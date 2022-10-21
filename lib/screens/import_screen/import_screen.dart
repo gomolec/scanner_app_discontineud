@@ -14,31 +14,34 @@ class ImportScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const ImportFromHtmlAlertDialog();
-                  },
-                );
-              },
-              child: const Text("Importowanie skopiowanej tabeli HTML"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return const ImportFromCsvStructureAlert();
-                  },
-                );
-              },
-              child: const Text("Importowanie pliku CSV"),
-            )
-          ],
+        child: Center(
+          child: Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const ImportFromHtmlAlertDialog();
+                    },
+                  );
+                },
+                child: const Text("Importowanie skopiowanej tabeli HTML"),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const ImportFromCsvStructureAlert();
+                    },
+                  );
+                },
+                child: const Text("Importowanie pliku CSV"),
+              )
+            ],
+          ),
         ),
       ),
     );

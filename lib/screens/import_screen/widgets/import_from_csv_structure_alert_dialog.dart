@@ -154,9 +154,7 @@ class CsvImportFirstRowCheckbox extends StatelessWidget {
               builder: (context, value, child) => Checkbox(
                 value: !value,
                 onChanged: (value) {
-                  context
-                      .read<CsvImportProvider>()
-                      .updateIsFirstRowData(value!);
+                  context.read<CsvImportProvider>().updateIsFirstRowData();
                 },
               ),
             ),

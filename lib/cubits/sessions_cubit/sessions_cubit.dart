@@ -68,12 +68,12 @@ class SessionsCubit extends Cubit<SessionsState> {
     }
   }
 
-  void importSession() async {
-    await sessionsRepository.importSession();
+  void importSessionFromJson() async {
+    await sessionsRepository.importSessionFromJson;
   }
 
-  void exportSession({required String id}) async {
-    await sessionsRepository.exportSession(id: id);
+  void exportSessionToJson({required String id}) async {
+    await sessionsRepository.exportSessionToJson(id: id);
   }
 
   void importSessionFromHtmlTable(String data) async {
@@ -92,6 +92,10 @@ class SessionsCubit extends Cubit<SessionsState> {
       csvStructure: csvStructure,
       importedCsvList: importedCsvList,
     );
+  }
+
+  void exportSessionToCsv({required String id}) async {
+    await sessionsRepository.exportSessionToCsv(id: id);
   }
 
   @override

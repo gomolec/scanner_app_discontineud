@@ -51,7 +51,7 @@ class SessionsRepositoryDebugScreen extends StatelessWidget {
                         key: Key('item ${snapshot.data![index].id}'),
                         confirmDismiss: (DismissDirection direction) async {
                           if (direction == DismissDirection.startToEnd) {
-                            await sessionsRepository.exportSession(
+                            await sessionsRepository.exportSessionToJson(
                                 id: snapshot.data![index].id);
                           } else if (direction == DismissDirection.endToStart) {
                             await sessionsRepository
@@ -147,7 +147,7 @@ class SessionsRepositoryDebugScreen extends StatelessWidget {
               heroTag: "btn1",
               child: const Icon(Icons.download_rounded),
               onPressed: () async {
-                await sessionsRepository.importSession();
+                await sessionsRepository.importSessionFromJson();
               },
             ),
           ),

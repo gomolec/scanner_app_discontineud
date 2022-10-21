@@ -18,7 +18,7 @@ class SessionsHistoryScreen extends StatelessWidget {
           FloatingActionButton(
             heroTag: "import_floating_button",
             onPressed: () {
-              context.read<SessionsCubit>().importSession();
+              context.read<SessionsCubit>().importSessionFromJson();
             },
             tooltip: 'Import session',
             child: const Icon(Icons.download_rounded),
