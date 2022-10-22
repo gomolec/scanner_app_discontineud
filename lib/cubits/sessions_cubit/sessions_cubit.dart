@@ -68,8 +68,23 @@ class SessionsCubit extends Cubit<SessionsState> {
     }
   }
 
+  void downloadSessionImages({String? id, required bool value}) async {
+    if (id == null) {
+      if (actualSession != null) {
+        actualSession = sessionsRepository
+            .findById(actualSession!.id)!
+            .copyWith(downloadImages: () => value);
+        await sessionsRepository.updateSession(actualSession!);
+      }
+    } else {
+      await sessionsRepository.updateSession(
+        sessionsRepository.findById(id)!.copyWith(downloadImages: () => value),
+      );
+    }
+  }
+
   void importSessionFromJson() async {
-    await sessionsRepository.importSessionFromJson;
+    await sessionsRepository.importSessionFromJson();
   }
 
   void exportSessionToJson({required String id}) async {

@@ -34,7 +34,9 @@ class SearchBar extends StatelessWidget {
               suffixIcon: value.searchQuery.isNotEmpty
                   ? IconButton(
                       icon: const Icon(Icons.close_rounded),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<SearchBarProvider>().updateQuery("");
+                      },
                     )
                   : null,
               border: const OutlineInputBorder(),

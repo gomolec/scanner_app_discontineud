@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:scanner_app/providers/csv_import_provider.dart';
 
 import '/models/models.dart';
 import '/providers/quantity_provider.dart';

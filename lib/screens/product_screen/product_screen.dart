@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scanner_app/cubits/products_cubit/products_cubit.dart';
 import 'package:scanner_app/screens/product_screen/widgets/pin_button.dart';
+import 'package:scanner_app/screens/product_screen/widgets/product_image.dart';
+import 'package:scanner_app/screens/product_screen/widgets/product_link_button.dart';
 import 'package:scanner_app/screens/product_screen/widgets/quantity_buttons.dart';
+import 'package:scanner_app/services/krukam_urls_service.dart';
 
 import '../../models/models.dart';
 import '../../providers/quantity_provider.dart';
@@ -13,6 +16,7 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = ModalRoute.of(context)!.settings.arguments as Product;
+    final KrukamUrlsService linksService = KrukamUrlsService();
 
     bool isPinned = product.isPinned;
     void setPin(bool value) {
@@ -46,12 +50,9 @@ class ProductScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  width: MediaQuery.of(context).size.height * 0.4,
-                  color: Colors.grey,
-                ),
+              ProductImage(
+                product: product,
+                linkService: linksService,
               ),
               const SizedBox(height: 8),
               Text(
@@ -71,12 +72,9 @@ class ProductScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Center(
-                child: TextButton.icon(
-                  onPressed: null,
-                  icon: const Icon(Icons.link_rounded),
-                  label: const Text("Artykuł na stronie internetowej"),
-                ),
+              ProductLinkButton(
+                product: product,
+                linkService: linksService,
               ),
             ],
           ),

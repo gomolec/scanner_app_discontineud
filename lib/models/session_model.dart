@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -14,12 +15,15 @@ class Session extends Equatable {
   final DateTime? endDate;
   @HiveField(3)
   final String? author;
+  @HiveField(4)
+  final bool? downloadImages;
 
   const Session({
     required this.id,
     required this.startDate,
     this.endDate,
     this.author,
+    this.downloadImages,
   });
 
   Session copyWith({
@@ -27,12 +31,15 @@ class Session extends Equatable {
     DateTime? startDate,
     DateTime? Function()? endDate,
     String? Function()? author,
+    bool? Function()? downloadImages,
   }) {
     return Session(
       id: id ?? this.id,
       startDate: startDate ?? this.startDate,
       endDate: endDate != null ? endDate() : this.endDate,
       author: author != null ? author() : this.author,
+      downloadImages:
+          downloadImages != null ? downloadImages() : this.downloadImages,
     );
   }
 
@@ -42,6 +49,7 @@ class Session extends Equatable {
       'startDate': startDate.millisecondsSinceEpoch,
       'endDate': endDate?.millisecondsSinceEpoch,
       'author': author,
+      'downloadImages': downloadImages,
     };
   }
 
@@ -53,6 +61,7 @@ class Session extends Equatable {
           ? DateTime.fromMillisecondsSinceEpoch(map['endDate'])
           : null,
       author: map['author'],
+      downloadImages: map['downloadImages'],
     );
   }
 
@@ -63,9 +72,9 @@ class Session extends Equatable {
 
   @override
   String toString() {
-    return 'Session(id: $id, startDate: $startDate, endDate: $endDate, author: $author)';
+    return 'Session(id: $id, startDate: $startDate, endDate: $endDate, author: $author, downloadImages: $downloadImages)';
   }
 
   @override
-  List<Object?> get props => [id, startDate, endDate, author];
+  List<Object?> get props => [id, startDate, endDate, author, downloadImages];
 }

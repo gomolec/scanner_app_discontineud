@@ -21,13 +21,14 @@ class SessionAdapter extends TypeAdapter<Session> {
       startDate: fields[1] as DateTime,
       endDate: fields[2] as DateTime?,
       author: fields[3] as String?,
+      downloadImages: fields[4] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Session obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class SessionAdapter extends TypeAdapter<Session> {
       ..writeByte(2)
       ..write(obj.endDate)
       ..writeByte(3)
-      ..write(obj.author);
+      ..write(obj.author)
+      ..writeByte(4)
+      ..write(obj.downloadImages);
   }
 
   @override
